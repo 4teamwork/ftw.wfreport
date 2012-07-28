@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="ftw.wfreport">
+
+    <browser:page
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        name="workflow-report"
+        class=".workflows.WorkflowsView"
+        permission="cmf.ManagePortal"
+        />
+
+    <browser:page
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        name="tabbedview_view-workflows"
+        class=".workflows.WorkflowsTab"
+        permission="cmf.ManagePortal"
+        />
+
+    <adapter factory=".workflows.WorkflowsTableSource" />
+
+</configure>
