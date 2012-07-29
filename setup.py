@@ -1,11 +1,15 @@
 from setuptools import setup, find_packages
 import os
 
+
 version = '1.0dev0'
 
 tests_require = [
     'unittest2',
+    'ftw.testing',
+    'plone.app.testing',
     ]
+
 
 setup(name='ftw.wfreport',
       version=version,
