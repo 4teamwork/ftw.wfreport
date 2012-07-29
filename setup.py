@@ -4,6 +4,7 @@ import os
 version = '1.0dev0'
 
 tests_require = [
+    'unittest2',
     ]
 
 setup(name='ftw.wfreport',
