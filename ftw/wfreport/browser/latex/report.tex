@@ -1,0 +1,32 @@
+<%block name="documentclass">
+\documentclass[landscape,a4paper,10pt]{article}
+</%block>
+
+<%block name="usePackages">
+  ${packages}
+</%block>
+
+<%block name="beneathPackages">
+</%block>
+
+<%block name="textSettings">
+</%block>
+
+
+<%block name="layoutSettings">
+</%block>
+
+<%block name="aboveDocument">
+</%block>
+
+\begin{document}
+
+<%block name="documentTop">
+</%block>
+
+${content}
+
+<%block name="documentBottom">
+</%block>
+
+\end{document}

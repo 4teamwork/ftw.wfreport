@@ -19,4 +19,14 @@
 
     <adapter factory=".workflows.WorkflowsTableSource" />
 
+    <browser:page
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        name="generate-workflow-report"
+        class=".report.WorkflowsReport"
+        permission="cmf.ManagePortal"
+        />
+
+    <adapter factory=".report.WorkflowLaTeXView"
+             provides="ftw.pdfgenerator.interfaces.ILaTeXView" />
+
 </configure>

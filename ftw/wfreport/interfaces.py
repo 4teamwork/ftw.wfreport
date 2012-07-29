@@ -1,3 +1,4 @@
+from ftw.pdfgenerator.interfaces import ILaTeXLayout
 from ftw.table.interfaces import ITableSourceConfig
 from zope.interface import Interface
 
@@ -5,6 +6,13 @@ from zope.interface import Interface
 class IWorkflowsTableSourceConfig(ITableSourceConfig):
     """Table source config interface for workflows.
     """
+
+
+class IWorkflowsReportLayout(ILaTeXLayout):
+    """Workflows report latex layout marker.
+    """
+
+
 class IWorkflowDataProvider(Interface):
     """Provides workflow data.
     The data is generally provided as dicts which are also accesible in

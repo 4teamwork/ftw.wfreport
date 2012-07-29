@@ -13,7 +13,7 @@ from zope.interface import implements
 
 def workflow_checkbox(item, value):
     return '<input type="checkbox" class="noborder selectable" ' + \
-        'name="workflows:list" id="%s" value="%s" />' % (item.id, item.id)
+        'name="paths:list" id="%s" value="%s" />' % (item.id, item.id)
 
 
 class WorkflowsView(TabbedView):
