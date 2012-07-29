@@ -1,10 +1,15 @@
 from Products.DCWorkflow.interfaces import IDCWorkflowDefinition
+from copy import deepcopy
 from ftw.wfreport.dict_object import DictObject
 from ftw.wfreport.interfaces import IWorkflowDataProvider
+from ftw.wfreport.interfaces import IWorkflowReportConfig
 from plone.app.workflow.interfaces import ISharingPageRole
 from zope.component import adapts
+from zope.component import getAdapter
+from zope.component import queryAdapter
 from zope.component import queryUtility
 from zope.i18n import translate
+from zope.i18nmessageid import Message
 from zope.i18nmessageid import MessageFactory
 from zope.interface import implements
 
@@ -22,6 +27,7 @@ class WorkflowDataProvider(object):
     def __init__(self, workflow):
         self.workflow = workflow
         self._parsed = False
+        self._config = None
         self._states = None
         self._roles = None
         self._transitions = None
@@ -38,9 +44,9 @@ class WorkflowDataProvider(object):
         self._parse()
         return self._roles
 
-    def get_role_by_id(self, role_id):
+    def get_role_by_id(self, role_id, default=None):
         self._parse()
-        return map_by_key(self._roles).get(role_id)
+        return map_by_key(self._roles).get(role_id, default)
 
     def get_permission_mapping(self, state_id):
         return self._states.get(state_id)
@@ -59,16 +65,23 @@ class WorkflowDataProvider(object):
         if self._parsed and not reparse:
             return
         self._parsed = True
+        self._load_config()
 
         self._parse_roles()
         self._parse_states()
         self._parse_transitions()
         self._add_transitions_to_states()
 
+    def _load_config(self):
+        self._config = queryAdapter(self.workflow, IWorkflowReportConfig,
+                                    name=self.workflow.id)
+        if not self._config:
+            self._config = getAdapter(self.workflow, IWorkflowReportConfig)
+
     def _parse_states(self):
-        self._states = []
+        states = []
         for state in self.workflow.states.values():
-            self._states.append(DictObject({
+            states.append(DictObject({
                         'id': state.id,
                         'title': self._translate(state.id),
                         'transitions': -1,  # not yet loaded
@@ -77,23 +90,63 @@ class WorkflowDataProvider(object):
                         'initial': state.id == self.workflow.initial_state,
                         }))
 
+        self._states = self._config.order_states(states)
+
     def _parse_permission_roles_for_state(self, state):
         result = []
-        for permission, roles in state.permission_roles.items():
-            result.append(DictObject({
-                        'id': permission,
-                        'title': self._translate(permission, domain='ftw.wfreport'),
-                        'roles': [self.get_role_by_id(role)
-                                  for role in roles]}))
 
+        hidden = self._config.get_hidden_permissions()
+        merged = self._config.get_merged_permissions_mapped_by_permission()
+        merged_inserted = {}
+
+        for permission, roles in state.permission_roles.items():
+            if permission in hidden:
+                continue
+
+            if permission in merged and \
+                    merged[permission]['title'] not in merged_inserted:
+                merge = merged[permission]
+                data = DictObject({
+                        'id': merge['title'],
+                        'title': merge['title'],
+                        'roles': [self.get_role_by_id(role)
+                                  for role in roles if self.get_role_by_id(role)],
+                        'merged': [self._translate(perm) for perm
+                                   in merge['permissions']]})
+
+                result.append(data)
+                merged_inserted[merge['title']] = data
+
+            elif permission in merged:
+                merge = merged[permission]
+                data = merged_inserted[merge['title']]
+                roles = set(data.roles)
+                roles.update([self.get_role_by_id(role) for role in roles
+                              if self.get_role_by_id(role)])
+                data.roles = list(roles)
+
+            else:
+                result.append(DictObject({
+                            'id': permission,
+                            'title': self._translate(permission,
+                                                     domain='ftw.wfreport'),
+                            'roles': [self.get_role_by_id(role)
+                                      for role in roles
+                                      if self.get_role_by_id(role)]}))
+
+        result.sort(key=lambda permission: permission.title)
         return result
 
     def _parse_roles(self):
         self._roles = []
-        for role_id in self.workflow.getAvailableRoles():
-            role_title = role_id
+        hidden = self._config.get_hidden_roles()
 
-            role_utility = queryUtility(ISharingPageRole, name='Administrator')
+        for role_id in self.workflow.getAvailableRoles():
+            if role_id in hidden:
+                continue
+
+            role_title = role_id
+            role_utility = queryUtility(ISharingPageRole, name=role_id)
             if role_utility:
                 role_title = self._translate(role_utility.title)
 
@@ -122,5 +175,7 @@ class WorkflowDataProvider(object):
                     self.get_transition_by_id(transition_id))
 
     def _translate(self, text, domain='plone'):
-        return translate(MessageFactory(domain)(text),
-                         context=self.workflow.REQUEST)
+        if not isinstance(text, Message):
+            text = MessageFactory(domain)(text)
+
+        return translate(text, context=self.workflow.REQUEST)
