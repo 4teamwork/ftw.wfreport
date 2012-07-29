@@ -10,5 +10,6 @@
 
   <adapter factory=".data.WorkflowDataProvider" />
   <adapter factory=".config.DefaultWorkflowConfig" />
+  <adapter factory=".graph.WorkflowCreator" />
 
 </configure>

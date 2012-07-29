@@ -4,6 +4,7 @@ from ftw.pdfgenerator.browser.standalone import BaseStandalonePDFView
 from ftw.pdfgenerator.interfaces import ILaTeXLayout
 from ftw.pdfgenerator.layout.makolayout import MakoLayoutBase
 from ftw.pdfgenerator.view import MakoLaTeXView
+from ftw.wfreport.interfaces import IGraphCreator
 from ftw.wfreport.interfaces import IWorkflowDataProvider
 from ftw.wfreport.interfaces import IWorkflowReportConfig
 from ftw.wfreport.interfaces import IWorkflowsReportLayout
@@ -66,13 +67,18 @@ class WorkflowLaTeXView(MakoLaTeXView):
     def get_render_arguments(self):
         args = super(WorkflowLaTeXView, self).get_render_arguments()
         data = getAdapter(self.context, IWorkflowDataProvider)
+
+        footnotes = self.create_graph()
+
         args.update({
                 'title': self.context.title,
                 'data': data,
                 '_': lambda text: translate(
                     text, domain='ftw.wfreport', context=self.request),
                 'convert': self.convert,
-                'translate_permissions': self.translate_permissions})
+                'translate_permissions': self.translate_permissions,
+                'graph': '%s.pdf' % self.context.id,
+                'footnotes': footnotes})
         return args
 
     def translate_permissions(self, permissions):
@@ -95,3 +101,7 @@ class WorkflowLaTeXView(MakoLaTeXView):
             config = getAdapter(self.context, IWorkflowReportConfig)
 
         return config
+
+    def create_graph(self):
+        creator = getAdapter(self.context, IGraphCreator)
+        return creator(self.layout.get_builder().build_directory, self.context.id)

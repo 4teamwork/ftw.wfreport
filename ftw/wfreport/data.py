@@ -58,6 +58,27 @@ class WorkflowDataProvider(object):
         self._parse()
         return map_by_key(self._transitions).get(transition_id)
 
+    def get_allowed_roles(self, transition, state):
+        wfstate = self.workflow.states.get(state.id)
+        roles = set([])
+
+        for role_id in transition.role_guard:
+            role = self.get_role_by_id(role_id)
+            if role:
+                roles.add(role)
+
+        for permission in transition.permission_guard:
+            perm = wfstate.permission_roles.get(permission)
+            if not perm:
+                continue
+
+            for role_id in perm:
+                role = self.get_role_by_id(role_id)
+                if role:
+                    roles.add(role)
+
+        return roles
+
     def _parse(self, reparse=False):
         """Parses the workflow definition if necessary.
         """
@@ -145,7 +166,7 @@ class WorkflowDataProvider(object):
             if role_id in hidden:
                 continue
 
-            role_title = role_id
+            role_title = self._translate(role_id, domain='ftw.wfreport')
             role_utility = queryUtility(ISharingPageRole, name=role_id)
             if role_utility:
                 role_title = self._translate(role_utility.title)
@@ -157,10 +178,26 @@ class WorkflowDataProvider(object):
     def _parse_transitions(self):
         self._transitions = []
         for obj in self.workflow.transitions.values():
+            role_guard_text = obj.getGuard().getRolesText().strip()
+            if role_guard_text:
+                role_guard = [role.strip() for role
+                              in role_guard_text.split(';')]
+            else:
+                role_guard = []
+
+            permission_guard_text = obj.getGuard().getPermissionsText().strip()
+            if permission_guard_text:
+                permission_guard = [permission.strip() for permission
+                                    in permission_guard_text.split(';')]
+            else:
+                permission_guard = []
+
             self._transitions.append(DictObject({
                         'id': obj.id,
                         'title': self._translate(obj.title),
-                        'destination': self.get_state_by_id(obj.new_state_id)}))
+                        'destination': self.get_state_by_id(obj.new_state_id),
+                        'role_guard': role_guard,
+                        'permission_guard': permission_guard}))
 
     def _add_transitions_to_states(self):
         for state in self.get_states():

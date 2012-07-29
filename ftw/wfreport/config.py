@@ -40,9 +40,10 @@ class DefaultWorkflowConfig(object):
         return new_states
 
     def order_states_by_ids(self, states, state_ids):
-        states.sort(
-            key=lambda state: state not in state_ids \
-                and 100 or state_ids.index(state))
+        pos = lambda state: state.id not in state_ids \
+            and 100 or state_ids.index(state.id) + 1
+
+        states.sort(key=pos)
         return states
 
     def get_hidden_roles(self):

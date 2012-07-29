@@ -115,3 +115,17 @@ class IWorkflowReportConfig(Interface):
         """Hook for influecing the state order. A list of state dicts is
         passed and should be returned after ordering.
         """
+
+
+class IGraphCreator(Interface):
+    """An adapter creating a graph of a workflow.
+    """
+
+    def __init__(workflow):
+        """Adapts the workflow.
+        """
+
+    def __call__(directory, basename):
+        """Crates two files in the ``directory``, a `.pdf` and a
+        `.dot`, each filename beginning with ``basename``.
+        """
