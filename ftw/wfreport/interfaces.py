@@ -67,3 +67,43 @@ class IWorkflowDataProvider(Interface):
         represented as dict.
         See get_transitions().
         """
+
+
+class IWorkflowReportConfig(Interface):
+    """An (named) adapter for configuring the workflow report for a specific
+    workflow. It allows to:
+    - hide permissions
+    - merge permissions
+
+    It adapts the DC workflow with the id of the workflow as adapter name.
+    A default adapter configures common rules.
+    """
+
+    def __init__(workflow):
+        """Adapts the workflow definition.
+        """
+
+    def get_hidden_permissions():
+        """Returns a list of permission to hide as list of strings.
+        """
+
+    def get_merged_permissions():
+        """Returns a list of dicts containing merge informations. Example:
+
+        >>> [{'title': 'translated virtual permission title',
+        ...   'permissions': [<ids of the merged permissions>]}]
+        """
+
+    def get_merged_permissions_mapped_by_permission():
+        """Returns the results of get_merged_permissions as dict where the
+        key is the permission.
+        """
+
+    def get_hidden_roles():
+        """Returns a list of roles to hide.
+        """
+
+    def order_states(states):
+        """Hook for influecing the state order. A list of state dicts is
+        passed and should be returned after ordering.
+        """

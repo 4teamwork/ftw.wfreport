@@ -7,5 +7,6 @@
   <include package=".browser" />
 
   <adapter factory=".data.WorkflowDataProvider" />
+  <adapter factory=".config.DefaultWorkflowConfig" />
 
 </configure>
