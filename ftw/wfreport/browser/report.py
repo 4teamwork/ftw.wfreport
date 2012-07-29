@@ -5,9 +5,11 @@ from ftw.pdfgenerator.interfaces import ILaTeXLayout
 from ftw.pdfgenerator.layout.makolayout import MakoLayoutBase
 from ftw.pdfgenerator.view import MakoLaTeXView
 from ftw.wfreport.interfaces import IWorkflowDataProvider
+from ftw.wfreport.interfaces import IWorkflowReportConfig
 from ftw.wfreport.interfaces import IWorkflowsReportLayout
 from zope.component import adapts
 from zope.component import getAdapter
+from zope.component import queryAdapter
 from zope.i18n import translate
 from zope.interface import Interface
 from zope.interface import implements
@@ -68,5 +70,28 @@ class WorkflowLaTeXView(MakoLaTeXView):
                 'title': self.context.title,
                 'data': data,
                 '_': lambda text: translate(
-                    text, domain='ftw.wfreport', context=self.request)})
+                    text, domain='ftw.wfreport', context=self.request),
+                'convert': self.convert,
+                'translate_permissions': self.translate_permissions})
         return args
+
+    def translate_permissions(self, permissions):
+        translated = []
+        hidden_permissions = self._get_config().get_hidden_permissions()
+
+        for permission in permissions:
+            if permission in hidden_permissions:
+                continue
+
+            translated.append(
+                translate(permission, domain='ftw.wfreport', context=self.request))
+
+        return self.convert(', '.join(translated))
+
+    def _get_config(self):
+        config = queryAdapter(self.context, IWorkflowReportConfig,
+                                    name=self.context.id)
+        if not config:
+            config = getAdapter(self.context, IWorkflowReportConfig)
+
+        return config

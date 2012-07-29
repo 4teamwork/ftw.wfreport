@@ -1,0 +1,102 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2012-07-29 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: ftw.wfreport\n"
+
+msgid "ATContentTypes: Add Folder"
+msgstr ""
+
+msgid "ATContentTypes: Add Image"
+msgstr ""
+
+msgid "ATContentTypes: Add Link"
+msgstr ""
+
+msgid "Access future portal content"
+msgstr ""
+
+msgid "Access inactive portal content"
+msgstr ""
+
+msgid "Add portal content"
+msgstr ""
+
+msgid "Change local roles"
+msgstr ""
+
+msgid "Copy or Move"
+msgstr ""
+
+msgid "Delete objects"
+msgstr ""
+
+msgid "List folder contents"
+msgstr ""
+
+msgid "Modify constrain types"
+msgstr ""
+
+msgid "Modify portal content"
+msgstr ""
+
+msgid "Permission"
+msgstr ""
+
+msgid "PloneFormGen: Add Content"
+msgstr ""
+
+msgid "Portlets: Manage portlets"
+msgstr ""
+
+msgid "Reply to item"
+msgstr ""
+
+msgid "Request review"
+msgstr ""
+
+msgid "Review portal content"
+msgstr ""
+
+msgid "Sharing page: Delegate Administrator role"
+msgstr ""
+
+msgid "Sharing page: Delegate Contributor role"
+msgstr ""
+
+msgid "Sharing page: Delegate Editor role"
+msgstr ""
+
+msgid "Sharing page: Delegate Reader role"
+msgstr ""
+
+msgid "Sharing page: Delegate Reviewer role"
+msgstr ""
+
+msgid "Sharing page: Delegate Supervising Editor role"
+msgstr ""
+
+msgid "Sharing page: Delegate roles"
+msgstr ""
+
+msgid "View"
+msgstr ""
+
+#. Default: "Generate report"
+#: ./ftw/wfreport/browser/workflows.py:44
+msgid "button_generate_report"
+msgstr ""
+

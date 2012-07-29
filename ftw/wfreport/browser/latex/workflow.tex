@@ -1,21 +1,21 @@
 \section*{${title}}
 
 % for state in data.get_states():
-\subsection*{${state.title} (${state.id})}
+\subsection*{${state.title}}
 
 \begin{longtable}{|l|${'c' * len(data.get_roles())}|}
   \hline
-  {\bf ${_('Permission')}}
+  {\bf ${convert(_('Permission'))}}
   % for role in data.get_roles():
-  & \begin{sideways}{\bf ${role.title}}\phantom{x}\end{sideways}
-    \begin{sideways}(${role.id})\phantom{x}\end{sideways}
+  & \begin{sideways}{\bf ${convert(role.title)}}\phantom{x}\end{sideways}
   % endfor
   \hline
+  \endhead
 
   % for permission in state.permission_mapping:
-    ${permission.title}
+    ${convert(permission.title)}
     % if permission.get('merged'):
-      \footnote{{\bf ${permission.title}}: ${', '.join(permission.merged)}}
+      \footnote{{\bf ${convert(permission.title)}}: ${translate_permissions(permission.merged)}}
     % endif
     % for role in data.get_roles():
       & ${role in permission.roles and '\ensuremath{\\surd}' or ''}
@@ -26,4 +26,5 @@
 \end{longtable}
 
 \clearpage
+\setcounter{footnote}{0}
 % endfor

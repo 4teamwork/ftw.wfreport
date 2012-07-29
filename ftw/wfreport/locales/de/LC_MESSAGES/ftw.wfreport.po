@@ -1,0 +1,96 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2012-07-29 14:33+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: DOMAIN\n"
+
+msgid "ATContentTypes: Add Folder"
+msgstr "Ordner hinzufügen"
+
+msgid "ATContentTypes: Add Image"
+msgstr "Bild hinzufügen"
+
+msgid "ATContentTypes: Add Link"
+msgstr "Link hinzufügen"
+
+msgid "Access future portal content"
+msgstr "Künftige Inhalte ansehen"
+
+msgid "Access inactive portal content"
+msgstr "Abgelaufene Inhalte ansehen"
+
+msgid "Add portal content"
+msgstr "Inhalte hinzufügen"
+
+msgid "Change local roles"
+msgstr "Lokale rollen ändern"
+
+msgid "Copy or Move"
+msgstr "Kopieren / Verschieben"
+
+msgid "Delete objects"
+msgstr "Löschen"
+
+msgid "List folder contents"
+msgstr "Ansicht \"Inhalte\" benutzen"
+
+msgid "Modify constrain types"
+msgstr "Hinzufügbare Inhalte einschränken"
+
+msgid "Modify portal content"
+msgstr "Inhalt verändern"
+
+msgid "Permission"
+msgstr "Berechtigung"
+
+msgid "PloneFormGen: Add Content"
+msgstr "Formular hinzufügen"
+
+msgid "Portlets: Manage portlets"
+msgstr "Portlets verwlaten"
+
+msgid "Reply to item"
+msgstr "Kommentieren"
+
+msgid "Request review"
+msgstr "Einreichen"
+
+msgid "Review portal content"
+msgstr "Veröffentlichen"
+
+msgid "Sharing page: Delegate Administrator role"
+msgstr "Rolle \"Verwalten\" erteilen"
+
+msgid "Sharing page: Delegate Contributor role"
+msgstr "Rolle \"hinzufügen\" erteilen"
+
+msgid "Sharing page: Delegate Editor role"
+msgstr "Rolle \"bearbeiten\" erteilen"
+
+msgid "Sharing page: Delegate Reader role"
+msgstr "Rolle \"lesen\" erteilen"
+
+msgid "Sharing page: Delegate Reviewer role"
+msgstr "Rolle \"veröffentlichen\" erteilen"
+
+msgid "Sharing page: Delegate Supervising Editor role"
+msgstr "Rolle \"delegieren\" erteilen"
+
+msgid "Sharing page: Delegate roles"
+msgstr "Lokale rollen verwalten"
+
+msgid "View"
+msgstr "Ansehen"
+
+#. Default: "Generate report"
+#: ./ftw/wfreport/browser/workflows.py:44
+msgid "button_generate_report"
+msgstr "Bericht erstellen"
