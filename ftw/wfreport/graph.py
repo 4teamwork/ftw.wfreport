@@ -35,7 +35,7 @@ class WorkflowCreator(object):
             nodesep='0.5',
             layout='dot',
             rankdir="TB",
-            size='20!')
+            size='7.75,10.25')
 
         graph.node_attr.update(fontsize=18)
 

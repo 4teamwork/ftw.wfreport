@@ -1,5 +1,4 @@
 from Products.DCWorkflow.interfaces import IDCWorkflowDefinition
-from copy import deepcopy
 from ftw.wfreport.dict_object import DictObject
 from ftw.wfreport.interfaces import IWorkflowDataProvider
 from ftw.wfreport.interfaces import IWorkflowReportConfig
@@ -133,7 +132,8 @@ class WorkflowDataProvider(object):
                         'roles': [self.get_role_by_id(role)
                                   for role in roles if self.get_role_by_id(role)],
                         'merged': [self._translate(perm) for perm
-                                   in merge['permissions']]})
+                                   in merge['permissions']
+                                   if perm in state.permission_roles.keys()]})
 
                 result.append(data)
                 merged_inserted[merge['title']] = data

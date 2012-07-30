@@ -7,6 +7,7 @@
   % for text in footnotes:
     \item ${text}
   % endfor
+\end{enumerate}
 % endif
 
 \clearpage
@@ -20,7 +21,7 @@
   % for role in data.get_roles():
   & \begin{sideways}{\bf ${convert(role.title)}}\phantom{x}\end{sideways}
   % endfor
-  \hline
+  \\\hline
   \endhead
 
   % for permission in state.permission_mapping:
