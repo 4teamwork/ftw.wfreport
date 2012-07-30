@@ -71,7 +71,7 @@ class WorkflowCreator(object):
                             'kwargs': {}})
 
         for edge in edges.values():
-            label = ' / '.join(edge.title)
+            label = '\\n'.join(edge.title)
 
             if edge.roles:
                 num = self._add_footnote(', '.join(
