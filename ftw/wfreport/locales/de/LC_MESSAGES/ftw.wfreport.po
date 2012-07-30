@@ -55,7 +55,7 @@ msgid "PloneFormGen: Add Content"
 msgstr "Formular hinzufügen"
 
 msgid "Portlets: Manage portlets"
-msgstr "Portlets verwlaten"
+msgstr "Portlets verwalten"
 
 msgid "Reply to item"
 msgstr "Kommentieren"
