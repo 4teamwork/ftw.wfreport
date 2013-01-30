@@ -67,6 +67,9 @@ class WorkflowDataProvider(object):
                 roles.add(role)
 
         for permission in transition.permission_guard:
+            if not wfstate.permission_roles:
+                continue
+
             perm = wfstate.permission_roles.get(permission)
             if not perm:
                 continue
@@ -118,6 +121,9 @@ class WorkflowDataProvider(object):
         hidden = self._config.get_hidden_permissions()
         merged = self._config.get_merged_permissions_mapped_by_permission()
         merged_inserted = {}
+
+        if not state.permission_roles:
+            return []
 
         for permission, roles in state.permission_roles.items():
             if permission in hidden:
