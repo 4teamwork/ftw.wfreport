@@ -1,7 +1,7 @@
 ftw.wfreport
 ============
 
-``ftw.wfreport`` creates PDF reports of plone workflows.
+``ftw.wfreport`` creates PDF reports of Plone workflows.
 
 
 Usage
