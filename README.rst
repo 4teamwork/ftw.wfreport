@@ -15,7 +15,7 @@ Usage
     eggs +=
         ftw.wfreport
 
-- Go to the ``@@workflow-report`` on your plone site root.
+- Go to the ``@@workflow-report`` on your Plone site root.
 
 
 Links
