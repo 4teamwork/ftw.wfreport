@@ -5,7 +5,7 @@ from ftw.table.basesource import BaseTableSource
 from ftw.table.interfaces import ITableSource
 from ftw.wfreport import _
 from ftw.wfreport.interfaces import IWorkflowsTableSourceConfig
-from zope.app.component.hooks import getSite
+from zope.component.hooks import getSite
 from zope.component import adapts
 from zope.interface import Interface
 from zope.interface import implements
