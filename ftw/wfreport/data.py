@@ -175,7 +175,9 @@ class WorkflowDataProvider(object):
             role_title = self._translate(role_id, domain='ftw.wfreport')
             role_utility = queryUtility(ISharingPageRole, name=role_id)
             if role_utility:
-                role_title = self._translate(role_utility.title)
+                role_title = self._translate(
+                    '%s--ROLE--%s' % (self.workflow.id, role_id),
+                    default=self._translate(role_utility.title))
 
             self._roles.append(DictObject({
                         'id': role_id,
@@ -217,10 +219,10 @@ class WorkflowDataProvider(object):
                 state['transitions'].append(
                     self.get_transition_by_id(transition_id))
 
-    def _translate(self, text, domain='plone'):
+    def _translate(self, text, domain='plone', default=None):
         if not isinstance(text, Message):
             if isinstance(text, str):
                 text = text.decode('utf-8')
-            text = MessageFactory(domain)(text)
+            text = MessageFactory(domain)(text, default=default)
 
         return translate(text, context=self.workflow.REQUEST)
