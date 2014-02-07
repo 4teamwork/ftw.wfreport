@@ -60,7 +60,7 @@ class WorkflowCreator(object):
 
                 if key in edges:
                     edges[key].title.append(transition.title)
-                    edges[key].roles.update(
+                    edges[key].roles.extend(
                         data.get_allowed_roles(transition, state))
 
                 else:
