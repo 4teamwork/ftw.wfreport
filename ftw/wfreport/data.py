@@ -219,6 +219,8 @@ class WorkflowDataProvider(object):
 
     def _translate(self, text, domain='plone'):
         if not isinstance(text, Message):
+            if isinstance(text, str):
+                text = text.decode('utf-8')
             text = MessageFactory(domain)(text)
 
         return translate(text, context=self.workflow.REQUEST)
