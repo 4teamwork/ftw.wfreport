@@ -59,12 +59,12 @@ class WorkflowDataProvider(object):
 
     def get_allowed_roles(self, transition, state):
         wfstate = self.workflow.states.get(state.id)
-        roles = set([])
+        roles = []
 
         for role_id in transition.role_guard:
             role = self.get_role_by_id(role_id)
-            if role:
-                roles.add(role)
+            if role not in roles:
+                roles.append(role)
 
         for permission in transition.permission_guard:
             if not wfstate.permission_roles:
@@ -76,8 +76,8 @@ class WorkflowDataProvider(object):
 
             for role_id in perm:
                 role = self.get_role_by_id(role_id)
-                if role:
-                    roles.add(role)
+                if role not in roles:
+                    roles.append(role)
 
         return roles
 
