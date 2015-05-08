@@ -33,7 +33,3 @@ Copyright
 This package is copyright by `4teamwork <http://www.4teamwork.ch/>`_.
 
 ``ftw.wfreport`` is licensed under GNU General Public License, version 2.
-
-.. image:: https://cruel-carlota.pagodabox.com/ad409340d4dcf3730f1063b1533684e9
-   :alt: githalytics.com
-   :target: http://githalytics.com/4teamwork/ftw.wfreport
