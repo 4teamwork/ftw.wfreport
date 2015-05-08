@@ -21,9 +21,9 @@ Usage
 Links
 -----
 
-- Main github project repository: https://github.com/4teamwork/ftw.wfreport
-- Issue tracker: https://github.com/4teamwork/ftw.wfreport/issues
-- Package on pypi: http://pypi.python.org/pypi/ftw.wfreport
+- Github: https://github.com/4teamwork/ftw.wfreport
+- Issues: https://github.com/4teamwork/ftw.wfreport/issues
+- Pypi: http://pypi.python.org/pypi/ftw.wfreport
 - Continuous integration: https://jenkins.4teamwork.ch/search?q=ftw.wfreport
 
 
